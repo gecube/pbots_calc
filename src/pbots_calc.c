@@ -587,9 +587,9 @@ void free_results(Results* res) {
 void print_results(Results* res) {
   int i;
   if (res->MC) {
-    printf("After %d iterations of Monte Carlo Simulation, EV:\n", res->iters);
+    printf("After %lld iterations of Monte Carlo Simulation, EV:\n", res->iters);
   } else {
-    printf("Enumerated %d cases, EV:\n", res->iters);
+    printf("Enumerated %lld cases, EV:\n", res->iters);
   }
   for (i=0; i<res->size; i++) {
     printf("%s: %8.6f\n", res->hands[i], res->ev[i]);
@@ -597,12 +597,12 @@ void print_results(Results* res) {
 }
 
 // After simulation, collate results and compute the final equity.
-void finalize_results(Hands* hands, int iters, Results* res, int MC) {
-  int i;
+void finalize_results(Hands* hands, unsigned long long int iters, Results* res, int MC) {
+  unsigned long long int i;
   Hand_List* h = hands->hands;
   res->iters = iters;
   res->MC = MC;
-  for (i=0; i<hands->size; i++) {
+  for (i = 0; i<hands->size; i++) {
     res->hands[i] = strdup(h->hand->text);
     res->ev[i] = h->hand->ev / iters;
     h = h->next;
@@ -651,7 +651,7 @@ int enumerate(Hands* hands, StdDeck_CardMask dead, StdDeck_CardMask board,
               int nboard, Results* res) {
   StdDeck_CardMask* pockets = malloc(sizeof(StdDeck_CardMask) * hands->size);
   enum_result_t result;
-  int count = 0;
+  unsigned long long int count = 0;
   StdDeck_CardMask dead_temp = dead;
   int err;
   do {
@@ -772,7 +772,7 @@ int run_MC(Hands* hands, StdDeck_CardMask dead, StdDeck_CardMask board,
  * Return:
  *   error code - 0 indicates failure, 1 indicates success
  */
-int calc(const char* hand_str, char* board_str, char* dead_str, int iters, Results* res) {
+int calc(const char* hand_str, char* board_str, char* dead_str, unsigned long long int iters, Results* res) {
   StdDeck_CardMask board, dead;
   int ndead, nboard, err;
   Hands* hands;

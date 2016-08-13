@@ -20,7 +20,7 @@
 #ifndef __PBOTS_CALC_H__
 #define __PBOTS_CALC_H__
 
-//#define VERBOSE
+#define VERBOSE
 
 #if defined(_MSC_VER) || defined(__CYGWIN__) || defined(__MINGW32__) || defined( __BCPLUSPLUS__)  || defined( __MWERKS__)
   #define EXPORT_DLL_FLAG __declspec(dllexport)
@@ -37,8 +37,8 @@ extern "C" {          // we need to export the C interface
 typedef struct {
   double* ev;
   char** hands;
-  int iters;
-  int size;
+  unsigned long long int iters;
+  unsigned long long int size;
   int MC; // did we run Monte Carlo simulation?
 } Results;
 
@@ -47,7 +47,7 @@ EXPORT_DLL_FLAG Results* alloc_results(void);
 EXPORT_DLL_FLAG void print_results(Results*);
 EXPORT_DLL_FLAG void free_results(Results*);
 // Main library function - call equity calculator!
-EXPORT_DLL_FLAG int calc(const char*, char*, char*, int, Results*);
+EXPORT_DLL_FLAG int calc(const char*, char*, char*, unsigned long long int, Results*);
 
 #ifdef __cplusplus
 }
