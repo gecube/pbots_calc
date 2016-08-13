@@ -182,7 +182,7 @@ Sample 2-card hand ranges:
 * 88-TT = [88, 99, TT]
 * xx = random (all possible 2-card hands)
 
-3-card hand ranges are heard to specify. Currently you can only enumerate all
+3-card hand ranges are hard to specify. Currently you can only enumerate all
 the hands you mean, or specify random:
 
 * 8s9cTd,8s9cTh,8s9sTd,...
